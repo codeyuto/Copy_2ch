@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/create" method="post" th:object="${thread}">
+<div>タイトル<br>
+<input type="text" size="40" th:field="*{title}">
+</div>
+
+<div>名前<br>
+<input type="text" size="40" th:field="*{name}">
+</div>
+<div>内容<br>
+<textarea rows="5" cols="60" th:field="*{contents}"></textarea>
+</div>
+<div>
+
+<input type="submit">
+</div>
+</form>
+</body>
+</html>

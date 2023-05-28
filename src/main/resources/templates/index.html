@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>スレッド一覧</title>
+</head>
+<body>
+<h1>スレッド一覧</h1>
+<p th:text="|現在の投稿スレッド総数: ${all_threads} 件|">スレッド数</p>
+<form action="search/"  method="post">
+<p>スレッド検索</p>
+<input type="text" size="40" name="word">
+<input type="submit">
+</form>
+<p>
+<a href="/form">新規作成する？</a>
+</p>
+
+<ul>
+    <li th:each="thread : ${threads}" th:object="${thread}">
+        <a th:href="@{|/thread/*{id}|}" th:text="*{title}">タイトル</a>
+        <span th:text="*{postDateTime}">投稿日時</span>
+    </li>
+    
+</ul>
+
+
+</body>
+</html>
