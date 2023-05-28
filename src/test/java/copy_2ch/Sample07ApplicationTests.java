@@ -1,4 +1,4 @@
-package jp.winschool.spring.sample07;
+package copy_2ch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
