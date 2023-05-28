@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${thread.title}">スレッドタイトル</title>
+</head>
+<body>
+<p>
+<a href="/">一覧に戻る</a>
+</p>
+<div th:object="${thread}">
+    <h1 th:text="*{title}">タイトル</h1>
+    <p th:text="|1|">ID</p>
+    <p th:text="*{name}">名前</p>
+    <div>
+        投稿日時
+        <span th:text="*{postDateTime}">投稿日時</span>
+    </div>
+    <p>
+        <th:block th:each="line : *{contents.split('\n')}">
+            <th:block th:text="${line}"></th:block><br>
+        </th:block>
+    </p>
+    <form action="/responce" method="post" th:object="${responce}">
+        <!-- ここでは選択されているのはresponceオブジェクト（フォーム投稿用） -->
+        <br>
+        <!-- *{thread.id}は${responce.thread.id}と同じ意味になる -->
+        <input type="hidden" name="thread" th:value="*{thread.id}">
+        <p>名前</p>
+        <input type="text" size="40" th:field="*{name}"><br>
+        <p>内容</p>
+        <input type="text" size="40" th:field="*{contents}">
+        <input type="submit">
+    </form>
+    <!-- formを抜けたので選択はthreadオブジェクトに戻る -->
+
+    <ul>
+        <!-- threadオブジェクトのresponcesフィールドを参照（繰り返し変数は被らないようにcと定義） -->
+        <li th:each="res:*{responces}" th:object="${res}">
+            <!-- ここで選択されているのはthreadオブジェクトに関連づいている（すでに投稿された）responceオブジェクト -->
+            <span th:text="| *{res_id}. |"></span>
+            <span th:text="*{name}"></span>
+            <span th:text="*{postDateTime}"></span><br>
+            <span th:text="*{contents}"></span>
+        </li>
+    </ul>
+    </div>
+</body>
+</html>
